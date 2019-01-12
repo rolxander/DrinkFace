@@ -1,3 +1,20 @@
-<p>
-  login works!
-</p>
+<div class="container">
+  <div *ngIf="register" class="login">
+    
+  </div>
+  <div *ngIf="!register" class="register">
+    <label>Nombre
+      <input [(ngModel)]="nombre" type="text"  name="nombre">
+    </label><br>
+    <label> Email
+      <input [(ngModel)]="email" type="email" >
+    </label><br>
+    <label>Password
+      <input [(ngModel)]="password" type="password"> 
+    </label><br>
+    <label>Confirmar Password
+      <input [(ngModel)]="passConfirm" type="password">
+    </label><br>
+    <a (click)="enviarRegistro()" class="btn btn-primary"> Registrar</a>
+  </div>
+</div>
