@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth/auth.service';
 import { Registro } from '../interface/registro/registro';
-import { ConexionService } from '../services/conexion/conexion.service';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
+import { FirebaseFirestore, FirebaseStorage } from '@angular/fire';
+
 
 @Component({
   selector: 'app-login',
@@ -15,7 +18,9 @@ export class LoginComponent implements OnInit {
   password : string;
   nombre : string;
   passConfirm:string;
-  constructor(private auth : AuthService,private conexion : ConexionService) { }
+  constructor(private auth : AuthService){
+   
+   }
 
 
   enviarRegistro(){
@@ -28,7 +33,8 @@ export class LoginComponent implements OnInit {
             correo : this.email,
             uid    : res 
         };
-        this.conexion.registrarUsuario(user);
+       
+        
          
       })
       .catch(error=>console.error(error));
@@ -40,6 +46,16 @@ export class LoginComponent implements OnInit {
   }
   validarPassword(){
     return this.password == this.passConfirm
+  }
+  authGoogle(){
+    this.auth.createUserGoogle()
+    .then()
+    .catch()
+  }
+  authFacebook(){
+    this.auth.createFacebookUser()
+    .then()
+    .catch();
   }
   ngOnInit() {
   }

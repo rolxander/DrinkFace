@@ -8,13 +8,16 @@ import {Registro} from '../../interface/registro/registro';
 })
 export class ConexionService {
 
-
+  userRegister : AngularFirestoreCollection<Registro>
   
   constructor(private angularFirestore : AngularFirestore) {
+    this.userRegister = this.angularFirestore.collection("users");
    
+
    }
    registrarUsuario(user : Registro){   
-    this.angularFirestore.collection("uses").doc(user.uid).set(user);    
+    this.userRegister.doc(user.uid).set(user);
+           
    }
 
 
