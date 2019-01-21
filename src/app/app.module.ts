@@ -11,17 +11,20 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { environment } from '../environments/environment';
 import { from } from 'rxjs';
 import { ConexionService } from './services/conexion/conexion.service';
+import { HomeComponent } from './home/home.component';
 
 
 
 const appRoutes : Routes = [
-  {path:'login',component : LoginComponent}
+  {path:'login',component : LoginComponent},
+  {path:'home' , component : HomeComponent}
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
