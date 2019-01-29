@@ -16,10 +16,11 @@ export class AuthService {
 
   constructor(private angularFireAuth : AngularFireAuth) {
   }  
-  createUserWhitEmailAndPassword(email,password){
+  createUserWhitEmailAndPassword(email,password,nombre){
     return new Promise((resolve,reject)=>{           
       this.angularFireAuth.auth.createUserWithEmailAndPassword(email,password)
       .then(result =>{ 
+              //this.angularFireAuth.auth.currentUser.displayName = nombre;
               resolve(result.user.uid)
               this.angularFireAuth.auth.signOut();              
             })

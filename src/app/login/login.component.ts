@@ -25,21 +25,24 @@ export class LoginComponent implements OnInit {
   constructor(private auth : AuthService,private router :Router){
    
    }
-  
+  //Validador de stado de registrado o no registrado
   stateRegister(){    
     return this.register ? this.register=false : this.register=true;
   }
 
-  
+  //Ingreso con email y contraseña
   signInWithEmailPassword(){
     this.auth.SignInEmailAndPassword(this.email,this.password)
-    .then(()=>{this.router.navigate(['home'])})
+    .then(()=>{this.router.navigate(['home']);
+              
+            })
     .catch(()=>{alert("La informacion no es correcta")});
   }
+  //Enviar informacion de formulario  a firebase
   enviarRegistro(){
   
     if(this.validarPassword()){
-      this.auth.createUserWhitEmailAndPassword(this.email,this.password)
+      this.auth.createUserWhitEmailAndPassword(this.email,this.password,this.nombre)
       .then(res=>{
         const user :Registro = {
             nombre : this.nombre,
@@ -60,14 +63,20 @@ export class LoginComponent implements OnInit {
     }
      
   }
+  //validar si la confirmacion de contraseña es correcta
   validarPassword(){
     return this.password == this.passConfirm
   }
+  //inicio de seccion con google
   authGoogle(){
     this.auth.createUserGoogle()
-    .then(()=>{this.router.navigate(['home'])})
+    .then((response)=>{
+      //prueva de resevocion de usuario
+      console.log(response);
+      this.router.navigate(['home'])})
     .catch()
   }
+  //incicio de seccion con facebook
   authFacebook(){
     this.auth.createFacebookUser()
     .then(()=>{this.router.navigate(['home'])})
